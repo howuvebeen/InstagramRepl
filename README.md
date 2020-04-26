@@ -1,1 +1,1 @@
-# InstagramReplica
+# Instagram
