@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'newsfeed.apps.NewsfeedConfig',
-    'user.apps.UserConfig',
+    'newsfeed',
+    'user',
 ]
 
 MIDDLEWARE = [
