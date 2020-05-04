@@ -1,9 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import LoginControl from './Login';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
+import Landing from "./components/auth/Landing";
+import Login from "./components/auth/Login";
 
 ReactDOM.render(
-  <LoginControl />,
-  document.getElementById('root')
-);
+    <BrowserRouter>
+        <Switch>
+            <Route exact path="/" component={Landing}/>
+            <Route path="/login" component={Login}/>
+        </Switch>
+    </BrowserRouter>
+
+, document.getElementById("root"));
