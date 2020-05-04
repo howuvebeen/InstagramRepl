@@ -3,5 +3,5 @@ from django.urls import path
 import user.views
 
 urlpatterns = [
-    path('', user.views.AuthView().as_view(), name="authentication")
+    path('', user.views.LoginView().as_view(), name="authentication")
 ]

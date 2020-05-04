@@ -13,7 +13,7 @@ class ExampleView(APIView):
         return Response(content)
 
 
-class AuthView(APIView):
+class LoginView(APIView):
     authentication_classes = [SessionAuthentication, BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
@@ -24,3 +24,4 @@ class AuthView(APIView):
             'auth': unicode(request.auth),  # None
         }
         return Response(content)
+
