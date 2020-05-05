@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
 
-
+    'corsheaders',
     'newsfeed',
     'user',
 
