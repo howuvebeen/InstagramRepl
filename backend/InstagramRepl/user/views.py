@@ -3,25 +3,11 @@ from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.views.generic import TemplateView
 
 # Create your views here.
 
 
-class ExampleView(APIView):
-    def get(self, request):
-        content = {'message': 'Hello, world'}
-        return Response(content)
+# class Template_View(TemplateView):
 
-
-class LoginView(APIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, format=None):
-        content = {
-            # `django.contrib.auth.User` instance.
-            'user': unicode(request.user),
-            'auth': unicode(request.auth),  # None
-        }
-        return Response(content)
-
+#     template_name = "registration_email.html"
