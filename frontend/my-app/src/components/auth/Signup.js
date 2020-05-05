@@ -17,7 +17,7 @@ class Signup extends Component {
         const { handleSubmit, error } = this.props;
 
         return (
-            <div className="row justify-content-center">
+            <div className="d-flex flex-column align-items-center">
                 <form
                     className="col col-sm-4 card mt-5 p-2"
                     onSubmit={handleSubmit}
@@ -51,12 +51,12 @@ class Signup extends Component {
                     { renderError(error) }
 
                     <fieldset className="form-group">
-                        <button action="submit" className="btn btn-primary">Sign Up</button>
+                        <button action="submit" className="btn btn-primary w-100">Sign Up</button>
                     </fieldset>
-
-                    <p class="pt-5">Have an account? <Link to="/signup">Log in</Link></p>
                 </form>
+                <p class="col col-sm-4 card mt-3 p-2 text-md-center d-inline">Have an account? <Link to="/login">Log in</Link></p>
             </div>
+
         );
     }
 }

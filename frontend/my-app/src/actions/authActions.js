@@ -162,6 +162,7 @@ export function confirmPasswordChange(formValues, dispatch, props) {
 }
 
 export function activateUserAccount(formValues, dispatch, props) {
+    // Slice :key from the link 
     const { key } = props.match.params;
     const activateUserUrl = AuthUrls.USER_ACTIVATION;
     const data = Object.assign(formValues, { key });
