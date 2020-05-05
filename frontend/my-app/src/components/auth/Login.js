@@ -47,7 +47,7 @@ class Login extends Component {
 
                     <fieldset className="form-group">
                         { renderError(error) }
-                        <button action="submit" className="btn btn-primary">Login</button>
+                        <button class="w-100"action="submit" className="btn btn-primary">Login</button>
                     </fieldset>
 
                     <Link to="/reset_password">Forgot password?</Link>
