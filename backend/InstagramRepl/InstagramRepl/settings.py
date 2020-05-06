@@ -76,7 +76,7 @@ ROOT_URLCONF = 'InstagramRepl.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,3 +144,13 @@ STATIC_URL = '/static/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+# ACCOUNT_USERNAME_REQUIRED = True
+# LOGOUT_ON_PASSWORD_CHANGE = False
+
+EMAIL_FILE_PATH = 'tmp/emails'
+DEFAULT_FROM_EMAIL = 'admin@admin.com'
