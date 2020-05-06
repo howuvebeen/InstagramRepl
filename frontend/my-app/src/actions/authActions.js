@@ -20,11 +20,13 @@ export function loginUser(formValues, dispatch, props) {
         const loginUrl = AuthUrls.LOGIN;
 
         return axios.post(loginUrl, formValues).then((response) => {
-            // If request is good...
-            // Update state to indicate user is authenticated
+            // If request is good update state to indicate user is authenticated
+            // Store key from data to const token
             const token = response.data.key;
+            // Dispatch token to function authLogin() and AuthTypes.LOGIN 
             dispatch(authLogin(token));
 
+            // Store the changed token to token in localStorage 
             localStorage.setItem("token", token);
 
             // redirect to the route '/'
@@ -36,7 +38,9 @@ export function loginUser(formValues, dispatch, props) {
 }
 
 export function logoutUser() {
+    // Remove the token from localStorage 
     localStorage.removeItem("token");
+    history.push("/login");
     return {
         type: AuthTypes.LOGOUT
     };
@@ -49,9 +53,9 @@ export function signupUser(formValues, dispatch, props) {
         .then((response) => {
             // If request is good...
             // you can login if email verification is turned off.
-            // const token = response.data.key;
-            // dispatch(authLogin(token));
-            // localStorage.setItem("token", token);
+            const token = response.data.key;
+            dispatch(authLogin(token));
+            localStorage.setItem("token", token);
 
             // email need to be verified, so don't login and send user to signup_done page.
             // redirect to signup done page.
@@ -158,6 +162,7 @@ export function confirmPasswordChange(formValues, dispatch, props) {
 }
 
 export function activateUserAccount(formValues, dispatch, props) {
+    // Slice :key from the link 
     const { key } = props.match.params;
     const activateUserUrl = AuthUrls.USER_ACTIVATION;
     const data = Object.assign(formValues, { key });

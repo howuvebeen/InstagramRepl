@@ -17,8 +17,7 @@ class Login extends Component {
         const { handleSubmit, error } = this.props;
 
         return (
-            <div className="row justify-content-center">
-
+            <div className="d-flex flex-column align-items-center">
                 <form
                     className="col col-sm-4 card mt-5 p-2"
                     onSubmit={handleSubmit}
@@ -47,12 +46,12 @@ class Login extends Component {
 
                     <fieldset className="form-group">
                         { renderError(error) }
-                        <button action="submit" className="btn btn-primary">Login</button>
+                        <button action="submit" className="btn btn-primary w-100">Login</button>
                     </fieldset>
 
-                    <Link to="/reset_password">Forgot password?</Link>
-                    <p class="pt-5">Don't have an account? <Link to="/signup">Sign up</Link></p>
+                    <Link to="/reset_password" class="text-md-center">Forgot password?</Link>
                 </form>
+                <p class="col col-sm-4 card mt-3 p-2 text-md-center d-inline">Don't have an account? <Link to="/signup">Sign up</Link></p>
             </div>
         )
     }

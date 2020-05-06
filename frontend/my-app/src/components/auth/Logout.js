@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 
+
 class Logout extends Component {
+    constructor(props, context){
+        super(props, context);
+    }
 
     static propTypes = {
         logoutUser: PropTypes.func.isRequired
@@ -12,10 +16,9 @@ class Logout extends Component {
     componentWillMount() {
         this.props.logoutUser();
     }
-
     render() {
         return (
-            <h2>Sorry to see you go...</h2>
+            <p> Log out failed. Try again. </p>
         );
     }
 }
