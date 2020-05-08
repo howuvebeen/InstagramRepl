@@ -140,8 +140,8 @@ EMAIL_FILE_PATH = 'tmp/emails'
 DEFAULT_FROM_EMAIL = 'admin@admin.com'
 
 REST_REGISTRATION = {
-    'REGISTER_VERIFICATION_URL': 'https://127.0.0.1:3000/account/confirm-email/',
+    'REGISTER_VERIFICATION_URL': '127.0.0.1:3000/account/confirm-email/',
     'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-host/reset-password/',
-    'REGISTER_EMAIL_VERIFICATION_URL': 'https://127.0.0.1:3000/account/confirm-email/',
+    'REGISTER_EMAIL_VERIFICATION_URL': '127.0.0.1:3000/account/confirm-email/',
     'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
 }
