@@ -39,21 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_auth',
-
     'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'rest_auth.registration',
-
-    'allauth.socialaccount',
-
-
     'corsheaders',
     'newsfeed',
     'user',
-
     'phonenumber_field',
+    'rest_registration'
 
 ]
 
@@ -145,12 +136,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-# ACCOUNT_AUTHENTICATION_METHOD = 'email'
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
-# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
-# ACCOUNT_USERNAME_REQUIRED = True
-# LOGOUT_ON_PASSWORD_CHANGE = False
-
 EMAIL_FILE_PATH = 'tmp/emails'
 DEFAULT_FROM_EMAIL = 'admin@admin.com'
+
+REST_REGISTRATION = {
+    'REGISTER_VERIFICATION_URL': 'https://127.0.0.1:3000/verify-user/',
+    'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-host/reset-password/',
+    'REGISTER_EMAIL_VERIFICATION_URL': 'https://frontend-host/verify-email/',
+    'VERIFICATION_FROM_EMAIL': 'no-reply@example.com',
+}
