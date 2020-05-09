@@ -139,7 +139,14 @@ CORS_ORIGIN_ALLOW_ALL = True
 EMAIL_FILE_PATH = 'tmp/emails'
 DEFAULT_FROM_EMAIL = 'admin@admin.com'
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+}
+
 REST_REGISTRATION = {
+
     'REGISTER_VERIFICATION_URL': '127.0.0.1:3000/account/confirm-email',
     'RESET_PASSWORD_VERIFICATION_URL': 'https://frontend-host/reset-password/',
     'REGISTER_EMAIL_VERIFICATION_URL': '127.0.0.1:3000/account/confirm-email/',
