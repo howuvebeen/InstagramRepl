@@ -7,7 +7,7 @@ from user.models import Profile
 
 class Post(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    photo = models.ImageField()
+    photo = models.ImageField(upload_to='uploads/post/', null=True)
     description = models.CharField(max_length=250)
 
 

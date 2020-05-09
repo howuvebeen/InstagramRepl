@@ -11,8 +11,8 @@ class Profile(models.Model):
         User, on_delete=models.CASCADE, null=True, related_name="following")
     Followers = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, related_name="follower")
-    profile_photo = models.ImageField(null=True)
+    profile_photo = models.ImageField(upload_to='uploads/profile/', null=True)
     DOB = models.DateField()
 
     def __str__(self):
-        return user.username
+        return self.user.username

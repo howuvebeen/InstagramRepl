@@ -21,4 +21,5 @@ import user.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('user.urls'), name='user'),
+    path('newsfeed/', include('newsfeed.urls'), name='newsfeed')
 ]
