@@ -6,6 +6,8 @@ export default function(state = {}, action) {
             return { ...state, authenticated: true, token: action.payload};
         case AuthTypes.LOGOUT:
             return { ...state, authenticated: false, token: null};
+        case AuthTypes.LIST_POST:
+            return { ...state, post: action.payload};
         case AuthTypes.USER_PROFILE:
             return { ...state, user: action.payload};
     }

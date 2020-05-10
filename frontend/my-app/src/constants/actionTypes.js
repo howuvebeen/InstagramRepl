@@ -1,6 +1,8 @@
 export const AuthTypes = {
     LOGIN: "LOGIN",
     LOGOUT: "LOGOUT",
+    LIST_POST: "LIST_POST",
+
     CHANGE_PASSWORD: "CHANGE_PASSWORD",
     USER_PROFILE: "USER_PROFILE"
 };

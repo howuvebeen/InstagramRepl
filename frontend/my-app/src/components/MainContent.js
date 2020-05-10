@@ -13,6 +13,7 @@ import PasswordChange from "./auth/PasswordChange";
 import PasswordReset from "./auth/PasswordReset";
 import PasswordResetDone from "./auth/PasswordResetDone";
 import PasswordResetConfirm from "./auth/PasswordResetConfirm";
+import Newsfeed from "./auth/Newsfeed";
 import NoMatch from "./NoMatch";
 
 const MainContent = () => (
@@ -22,11 +23,13 @@ const MainContent = () => (
             <Route path="/login" component={Login}/>
             <Route path="/logout" component={Logout}/>
             <Route path="/signup" component={Signup}/>
-            <Route path="/account/confirm-email/:key" component={AccountActivation}/>
             <Route path="/signup_done" component={SignupDone}/>
+            <Route path="/account/:confirm"  component={AccountActivation}/>
             <Route path="/reset_password" component={PasswordReset}/>
             <Route path="/reset_password_done" component={PasswordResetDone}/>
-            <Route path="/reset/:uid/:token/" component={PasswordResetConfirm}/>
+            <Route path="/reset/:confirm" component={PasswordResetConfirm}/>
+            <Route exact path="/newsfeed" component={Newsfeed}/>
+
             <Route path="/profile" component={RequireAuth(UserProfile)}/>
             <Route path="/profile_edit" component={RequireAuth(UserProfileEdit)}/>
             <Route path="/change_password" component={RequireAuth(PasswordChange)}/>

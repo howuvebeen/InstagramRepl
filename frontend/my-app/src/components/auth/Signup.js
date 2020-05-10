@@ -26,24 +26,37 @@ class Signup extends Component {
                     <hr/>
 
                     <fieldset className="form-group">
-                        <Field name="email" label="Email" component={renderField}
-                               type="text"/>
-                    </fieldset>
-
-                    <fieldset className="form-group">
                         <Field name="username" label="Username" component={renderField}
                                type="text" validate={[required({message: "This field is required."})]}
                         />
                     </fieldset>
 
                     <fieldset className="form-group">
-                        <Field name="password1" label="Password" component={renderField}
+                        <Field name="first_name" label="First Name" component={renderField}
+                               type="text" validate={[required({message: "This field is required."})]}
+                        />
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <Field name="last_name" label="Last Name" component={renderField}
+                               type="text" validate={[required({message: "This field is required."})]}
+                        />
+                    </fieldset>
+
+                    <fieldset className="form-group">
+                        <Field name="email" label="Email Address" component={renderField}
+                               type="text"/>
+                    </fieldset>
+
+
+                    <fieldset className="form-group">
+                        <Field name="password" label="Password" component={renderField}
                                type="password" validate={[required({message: "This field is required."})]}
                         />
                     </fieldset>
 
                     <fieldset className="form-group">
-                        <Field name="password2" label="Confirm Password" component={renderField}
+                        <Field name="password_confirm" label="Confirm Password" component={renderField}
                                type="password" validate={[required({message: "This field is required."})]}
                         />
                     </fieldset>
@@ -64,9 +77,9 @@ class Signup extends Component {
 // Sync field level validation for password match
 const validateForm = values => {
     const errors = {};
-    const { password1, password2 } = values;
-    if (password1 !== password2) {
-        errors.password2 = "Password does not match."
+    const { password, password_confirm } = values;
+    if (password !== password_confirm) {
+        errors.password_confirm = "Password does not match."
     }
     return errors;
 };

@@ -10,6 +10,7 @@ class AccountActivation extends Component {
     };
 
     render() {
+
         const { handleSubmit, error } = this.props;
 
         return (
@@ -23,7 +24,7 @@ class AccountActivation extends Component {
 
                     <fieldset className="form-group">
                         {renderError(error)}
-                        <button action="submit" className="btn btn-primary">Activate</button>
+                        <button action="submit" className="btn btn-primary w-100">Activate</button>
                     </fieldset>
                 </form>
             </div>
