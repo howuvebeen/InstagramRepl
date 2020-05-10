@@ -1,26 +1,56 @@
 from django.shortcuts import render
 
-from rest_framework.views import APIView
-from newsfeed.models import Post
-from newsfeed.serializers import PostSerializer
+from rest_framework import generics
+from newsfeed.models import Post, Comment, Like
+from django.contrib.auth.models import User
+from newsfeed.serializers import PostSerializer, CommentSerializer, LikeSerializer, UserSerializer
 
 from rest_framework.response import Response
 from rest_framework import status
 
 
-class PostList(APIView):
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class PostList(generics.ListCreateAPIView):
     """
     Retrieve, update or delete a post instance.
     """
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
 
-    def get(self, request, format=None):
-        posts = Post.objects.all()
-        serializer = PostSerializer(posts, many=True)
-        return Response(serializer.data)
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
-    def post(self, request, format=None):
-        serializer = PostSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class CommentList(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+
+class LikeList(generics.ListCreateAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class LikeDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Like.objects.all()
+    serializer_class = LikeSerializer
