@@ -11,20 +11,24 @@ class UserSerializer(serializers.ModelSerializer):
     comments = serializers.PrimaryKeyRelatedField(many= True, queryset = Comment.objects.all())
     likes = serializers.PrimaryKeyRelatedField(many= True, queryset = Like.objects.all())
 
+
     class Meta:
         model = User
         fields = ['id', 'username', 'profiles', 'posts', 'comments', 'likes']
+
 
 class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['owner', 'photo', 'description']
+        fields = ['author', 'photo', 'description']
+
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['text', 'owner', 'post']
+
 
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
