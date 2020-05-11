@@ -13,24 +13,36 @@ class Header extends Component {
         if (this.props.authenticated) {
             return (
                 [
-                    <li className="nav-item" key="profile">
-                        <Link className="nav-link" to="/profile">Profile</Link>
-                    </li>,
-                    <li className="nav-item" key="logout">
-                        <Link className="nav-link" to="/logout">Logout</Link>
-                    </li>
+                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                        <Link to="/newsfeed" className="navbar-brand">Instagram</Link>
+                        <ul className="navbar-nav float-right">
+                            <li className="nav-item" key="profile">
+                                <Link className="nav-link" to="/profile">Profile</Link>
+                            </li>
+                            <li className="nav-item" key="logout">
+                                <Link className="nav-link" to="/logout">Logout</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                   
                 ]
             );
         //If not authenticated, show Login and Sign up in nav-bar
         } else {
             return (
                 [
-                    <li className="nav-item" key="login">
-                        <Link className="nav-link" to="/login">Login</Link>
-                    </li>,
-                    <li className="nav-item" key="signup">
-                        <Link className="nav-link" to="/signup">Sign Up</Link>
-                    </li>
+                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                        <Link to="/" className="navbar-brand">Instagram</Link>
+                        <ul className="navbar-nav float-right">
+                            <li className="nav-item" key="login">
+                                <Link className="nav-link" to="/login">Login</Link>
+                            </li>
+                            <li className="nav-item" key="signup">
+                                <Link className="nav-link" to="/signup">Sign Up</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                    
                 ]
             );
         }
@@ -38,12 +50,9 @@ class Header extends Component {
 
     render() {
         return (
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link to="/" className="navbar-brand">Instagram</Link>
-                <ul className="navbar-nav float-right">
-                    {this.renderLinks()}
-                </ul>
-            </nav>
+            <div>
+                {this.renderLinks()}
+            </div>
         )
     }
 }

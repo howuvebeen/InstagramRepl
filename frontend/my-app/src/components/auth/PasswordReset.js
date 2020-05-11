@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+
+
 import { reduxForm, Field, propTypes } from "redux-form";
 import { required } from "redux-form-validators"
-
 import { renderField, renderError} from "../../utils/renderUtils";
 import { resetPassword } from "../../actions/authActions";
 
@@ -15,23 +16,23 @@ class PasswordReset extends Component {
         const { handleSubmit, error } = this.props;
 
         return (
-            <div className="row justify-content-center">
-
+            <div className="d-flex flex-column align-items-center">
                 <form
                     className="col col-sm-4 card mt-5 p-2"
                     onSubmit={handleSubmit}
                 >
-                    <h4 className="text-md-center">Reset Your Password</h4>
+                    <h4 className="text-md-center">Reset Password</h4>
                     <hr/>
 
                     <fieldset className="form-group">
-                        <Field name="email" label="Please enter your email" component={renderField}
+                        <Field name="login" label="Username" component={renderField}
                                type="text" validate={[required({message: "This field is required."})]}
                         />
                     </fieldset>
 
+                    { renderError(error) }
+
                     <fieldset className="form-group">
-                        { renderError(error) }
                         <button action="submit" className="btn btn-primary">Submit</button>
                     </fieldset>
                 </form>

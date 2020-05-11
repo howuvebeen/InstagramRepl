@@ -17,24 +17,24 @@ export function authLogin(token) {
 }
 
 export function loginUser(formValues, dispatch, props) {
-        const loginUrl = AuthUrls.LOGIN;
+    const loginUrl = AuthUrls.LOGIN;
 
-        return axios.post(loginUrl, formValues).then((response) => {
-            // If request is good update state to indicate user is authenticated
-            // Store key from data to const token
-            const token = response.data.key;
-            // Dispatch token to function authLogin() and AuthTypes.LOGIN 
-            dispatch(authLogin(token));
+    return axios.post(loginUrl, formValues).then((response) => {
+        // If request is good update state to indicate user is authenticated
+        // Store key from data to const token
+        const token = response.data.key;
+        // Dispatch token to function authLogin() and AuthTypes.LOGIN 
+        dispatch(authLogin(token));
 
-            // Store the changed token to token in localStorage 
-            localStorage.setItem("token", token);
+        // Store the changed token to token in localStorage 
+        localStorage.setItem("token", token);
 
-            // redirect to the route '/'
-            history.push("/");
-        }).catch(error => {
-            const processedError = processServerError(error.response.data);
-            throw new SubmissionError(processedError);
-        });
+        // redirect to the route '/'
+        history.push("/newsfeed");
+    }).catch(error => {
+        const processedError = processServerError(error.response.data);
+        throw new SubmissionError(processedError);
+    });
 }
 
 export function logoutUser() {
@@ -46,17 +46,11 @@ export function logoutUser() {
     };
 }
 
-export function signupUser(formValues, dispatch, props) {
+export function signupUser(formValues) {
     const signupUrl = AuthUrls.SIGNUP;
 
     return axios.post(signupUrl, formValues)
         .then((response) => {
-            // If request is good...
-            // you can login if email verification is turned off.
-            const token = response.data.key;
-            dispatch(authLogin(token));
-            localStorage.setItem("token", token);
-
             // email need to be verified, so don't login and send user to signup_done page.
             // redirect to signup done page.
             history.push("/signup_done");
@@ -69,32 +63,106 @@ export function signupUser(formValues, dispatch, props) {
         });
 }
 
-function setUserProfile(payload) {
+export function activateUserAccount(formValues, dispatch, props) {
+    // Slice :key from the link 
+    const params  = new URLSearchParams(props.location.search);
+
+    const activateUserUrl = AuthUrls.USER_ACTIVATION;
+    const data = Object.assign(formValues, 
+        {user_id:params.get("user_id"), 
+        timestamp:params.get("timestamp"), 
+        signature:params.get("signature")});
+
+    return axios.post(activateUserUrl, data)
+        .then(response => {
+            dispatch(notifSend({
+                message: "Your account has been activated successfully, please log in",
+                kind: "info",
+                dismissAfter: 5000
+            }));
+
+            history.push("/login");
+        }).catch((error) => {
+            // If request is bad…
+            // Show an error to the user
+            const processedError = processServerError(error.response.data);
+            throw new SubmissionError(processedError);
+        });
+}
+
+export function resetPassword(formValues) {
+    const resetPasswordUrl = AuthUrls.RESET_PASSWORD;
+
+    return axios.post(resetPasswordUrl, formValues)
+        .then((response) => {
+            // redirect to reset done page
+            history.push("/reset_password_done");
+        })
+        .catch((error) => {
+            // If request is bad...
+            // Show an error to the user
+            const processedError = processServerError(error.response.data);
+            throw new SubmissionError(processedError);
+        });
+}
+
+export function confirmPasswordChange(formValues, dispatch, props) {
+    const params  = new URLSearchParams(props.location.search);
+
+    const resetPasswordConfirmUrl = AuthUrls.RESET_PASSWORD_CONFIRM;
+    const data = Object.assign(formValues, 
+        {user_id:params.get("user_id"), 
+        timestamp:params.get("timestamp"), 
+        signature:params.get("signature")});
+
+    return axios.post(resetPasswordConfirmUrl, data)
+        .then(response => {
+            dispatch(notifSend({
+                message: "Password has been reset successfully, please log in",
+                kind: "info",
+                dismissAfter: 5000
+            }));
+
+            history.push("/login");
+        }).catch((error) => {
+            // If request is bad...
+            // Show an error to the user
+            const processedError = processServerError(error.response.data);
+            throw new SubmissionError(processedError);
+        });
+}
+
+function setpostList(payload) {
     return {
-        type: AuthTypes.USER_PROFILE,
+        type: AuthTypes.LIST_POST,
         payload: payload
     };
 }
 
-export function getUserProfile() {
+export function getpostList() {
+    const postListUrl = AuthUrls.LIST_POST;
     return function(dispatch) {
-        const token = getUserToken(store.getState());
-        if (token) {
-            axios.get(AuthUrls.USER_PROFILE, {
-                headers: {
-                    authorization: 'Token ' + token
-                }
-            }).then(response => {
-                dispatch(setUserProfile(response.data))
-            }).catch((error) => {
-                // If request is bad...
-                // Show an error to the user
-                console.log(error);
-                // TODO: send notification and redirect
-            });
-        }
-    };
+        axios.get(postListUrl)
+        .then(response => {
+            dispatch(setpostList(response.data));
+            console.log();
+        }).catch((error) => {
+            // If request is bad...
+            // Show an error to the user
+            console.log(error);
+            // TODO: send notification and redirect
+        });
+    }
 }
+
+
+
+
+
+
+
+
+
 
 export function changePassword(formValues, dispatch, props) {
     const changePasswordUrl = AuthUrls.CHANGE_PASSWORD;
@@ -124,64 +192,31 @@ export function changePassword(formValues, dispatch, props) {
     }
 }
 
-export function resetPassword(formValues, dispatch, props) {
-    const resetPasswordUrl = AuthUrls.RESET_PASSWORD;
-
-    return axios.post(resetPasswordUrl, formValues)
-        .then(response => {
-            // redirect to reset done page
-            history.push("/reset_password_done");
-        }).catch((error) => {
-            // If request is bad...
-            // Show an error to the user
-            const processedError = processServerError(error.response.data);
-            throw new SubmissionError(processedError);
-        });
+function setUserProfile(payload) {
+    return {
+        type: AuthTypes.USER_PROFILE,
+        payload: payload
+    };
 }
 
-export function confirmPasswordChange(formValues, dispatch, props) {
-    const { uid, token } = props.match.params;
-    const resetPasswordConfirmUrl = AuthUrls.RESET_PASSWORD_CONFIRM;
-    const data = Object.assign(formValues, { uid, token });
-
-    return axios.post(resetPasswordConfirmUrl, data)
-        .then(response => {
-            dispatch(notifSend({
-                message: "Password has been reset successfully, please log in",
-                kind: "info",
-                dismissAfter: 5000
-            }));
-
-            history.push("/login");
-        }).catch((error) => {
-            // If request is bad...
-            // Show an error to the user
-            const processedError = processServerError(error.response.data);
-            throw new SubmissionError(processedError);
-        });
-}
-
-export function activateUserAccount(formValues, dispatch, props) {
-    // Slice :key from the link 
-    const { key } = props.match.params;
-    const activateUserUrl = AuthUrls.USER_ACTIVATION;
-    const data = Object.assign(formValues, { key });
-
-    return axios.post(activateUserUrl, data)
-        .then(response => {
-            dispatch(notifSend({
-                message: "Your account has been activated successfully, please log in",
-                kind: "info",
-                dismissAfter: 5000
-            }));
-
-            history.push("/login");
-        }).catch((error) => {
-            // If request is bad...
-            // Show an error to the user
-            const processedError = processServerError(error.response.data);
-            throw new SubmissionError(processedError);
-        });
+export function getUserProfile() {
+    return function(dispatch) {
+        const token = getUserToken(store.getState());
+        if (token) {
+            axios.get(AuthUrls.USER_PROFILE, {
+                headers: {
+                    authorization: 'Token ' + token
+                }
+            }).then(response => {
+                dispatch(setUserProfile(response.data))
+            }).catch((error) => {
+                // If request is bad...
+                // Show an error to the user
+                console.log(error);
+                // TODO: send notification and redirect
+            });
+        }
+    };
 }
 
 export function updateUserProfile(formValues, dispatch, props) {

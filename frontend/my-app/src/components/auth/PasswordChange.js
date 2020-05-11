@@ -30,13 +30,13 @@ class PasswordChange extends Component {
                     </fieldset>
 
                     <fieldset className="form-group">
-                        <Field name="new_password1" label="New Password" component={renderField}
+                        <Field name="password" label="Password" component={renderField}
                                type="password" validate={[required({message: "This field is required."})]}
                         />
                     </fieldset>
 
                     <fieldset className="form-group">
-                        <Field name="new_password2" label="Confirm New Password" component={renderField}
+                        <Field name="password_confirm" label="Password Confirm" component={renderField}
                                type="password" validate={[required({message: "This field is required."})]}
                         />
                     </fieldset>
@@ -54,9 +54,9 @@ class PasswordChange extends Component {
 // Sync field level validation for password match
 const validateForm = values => {
     const errors = {};
-    const { new_password1, new_password2 } = values;
-    if (new_password1 !== new_password2) {
-        errors.new_password2 = "Password does not match."
+    const { password, password_confirm } = values;
+    if (password !== password_confirm) {
+        errors.password_confirm = "Password does not match."
     }
     return errors;
 };

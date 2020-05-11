@@ -17,7 +17,6 @@ class UserProfile extends Component {
 
     renderUser() {
         const user = this.props.user;
-        console.log(user);
         if (user) {
             return (
                 <div className="mx-2">
