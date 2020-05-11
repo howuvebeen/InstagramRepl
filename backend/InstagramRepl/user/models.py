@@ -6,7 +6,7 @@ import datetime
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    owner = models.OneToOneField('auth.User', related_name= 'profiles', on_delete=models.CASCADE)
     Following = models.ManyToManyField(
         "self", related_name="following", blank=True)
     Followers = models.ManyToManyField(
@@ -16,4 +16,4 @@ class Profile(models.Model):
     DOB = models.DateField(default=datetime.date.today)
 
     def __str__(self):
-        return self.user.username
+        return self.owner.username
