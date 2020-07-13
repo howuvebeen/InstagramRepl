@@ -24,7 +24,7 @@ This application is planned to be deployed as a trial with AWS Elastic Beanstalk
 
 ## Contributors
 
-- Kayla Heo - Front-End Developer
+- Yubin Heo - Front-End Developer
 - Dongho Kim - Back-End Developer
 - Kyu Hwan Choi - Back-End Developer & Deployment
 - Dayoon Dana Kim - Deployment
