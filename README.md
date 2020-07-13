@@ -16,6 +16,9 @@ This application is planned to be deployed as a trial with AWS Elastic Beanstalk
 
 ### Frontend
 
+1. Go into the my-app folder
+2. Start by running the built-in command: `npm start`
+
 ### Backend
 
 1. Run the virtual environment.
