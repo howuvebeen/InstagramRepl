@@ -1,4 +1,4 @@
-# InstagramRepl
+# instagram-repl
 
 **Last updated: 4/26/2020**
 
