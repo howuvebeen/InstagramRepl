@@ -1,31 +1,71 @@
 # instagram-repl
 
-**Last updated: 4/26/2020**
 
-This is a **replication of the Instagram web app**.
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+<img src="preview.png" alt="preview">
+</p>
 
-This application is built using React on frontend and Django on backend.
+<h2 align="center">Instagram Replication</h2>
 
+<p align="center">
+<strong>This is a replication of the Instagram web app.</strong>
+<br />
+<br />
+<code>React</code>
+·
+<code>Redux</code>
+·
+<code>Django</code>
+·
+<code>Instagram</code>
+</p>
+
+<!-- TABLE OF CONTENTS -->
+# Table of Contents
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Running Frontend](#running-frontend)
+   * [Running Backend](#running-backend)
+* [License](#license)
+
+<!-- ABOUT THE PROJECT -->
+
+# About The Project
+
+This is a replication of the Instagram web app. This application is built using React on frontend and Django on backend.
 This application is planned to be deployed as a trial with AWS Elastic Beanstalk.
 
-## Project Setup
+## Built With
 
-### General
+* React
+* Redux
+* Django
 
-1. Clone this repository.
+<!-- GETTING STARTED -->
+# Getting Started
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Frontend
+## Prerequisites
+* npm
+* Python3
+* Any source-code editor
 
+## Running Frontend
 1. Go into the my-app folder
 2. Start by running the built-in command: `npm start`
 
-### Backend
-
+## Running Backend
 1. Run the virtual environment.
 2. Start running the server: `python3 manage.py runserver`
 3. Start experimenting on python shell: `python3 manage.py shell`
 
-## Contributors
+
+<!-- LICENSE -->
+# License
 
 - Yubin Heo - Front-End Developer
 - Dongho Kim - Back-End Developer
