@@ -4,7 +4,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-<img src="instagram.jp2" alt="preview">
+<img src="instagram.png" alt="preview">
 </p>
 
 <h2 align="center">Instagram Replication</h2>
